@@ -23,7 +23,7 @@ let users = [];
 
 async function checkVisisted() {
   const result = await db.query(
-    "SELECT country_code FROM visited_countries join users on users.id=users_id where users_id = $1",
+    "SELECT country_code FROM visited_countries join users on users.id=users_id where users_id = $1 ",
     [currentUserId]
   );
   let countries = [];
@@ -35,7 +35,7 @@ async function checkVisisted() {
 // get users
 async function checkUsers() {
   try {
-    const result = await db.query(`select * from users`);
+    const result = await db.query(`select * from users order by id asc`);
 
     users = result.rows; // update the global array
     return users.find((user) => user.id == currentUserId);
